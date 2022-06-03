@@ -1,4 +1,8 @@
 import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 /**
  * EnemyTypes serve as templates for generating Enemies.
  * 
@@ -60,5 +64,22 @@ public class EnemyType
     public String getDesc()
     {
         return(this.description);
+    }
+    /**
+     * Returns size of enemyList
+     * @return size of enemyList
+     */
+    public static int getListSize()
+    {
+        return(enemyList.size());
+    }
+    /**
+     * Returns an EnemyType given an index
+     * @param index Index to search for
+     * @return EnemyType
+     */
+    public static EnemyType getTypeByIndex(int index)
+    {
+        return enemyList.get(index);
     }
 }

@@ -8,12 +8,14 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Enemy extends Entity
 {
     private String ability;
+    private String description;
 
     //constructor
-    public Enemy(String n, int l, boolean aggro, int db, String a)
+    public Enemy(String n, int l, boolean aggro, int db, String a, String d)
     {
         super(n, l, aggro, db);
         ability = a;
+        description = d;
     }
     /**
      * Attacks another Entity. Damage dealt is calculated based on stats of both attacker and victim.
@@ -67,5 +69,13 @@ public class Enemy extends Entity
     public String getAbility()
     {
         return(ability);
+    }
+    /**
+     * Returns description of Enemy
+     * @return description of Enemy
+     */
+    public String getDesc()
+    {
+        return(description);
     }
 }
