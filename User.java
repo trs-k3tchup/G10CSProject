@@ -1,5 +1,8 @@
 import java.util.concurrent.ThreadLocalRandom;
-
+/**
+ * The User class is a subclass of Entity and represents the User. The User has a score, enemiesDefeated, and can use items.
+ * @author Ash Choi
+ */
 public class User extends Entity
 {
     private int score, enemiesDefeated = 0;
@@ -12,6 +15,11 @@ public class User extends Entity
         super(n, aggro);
     }
 
+    /**
+     * Attacks another Entity. Damage dealt is calculated based on stats of both attacker and victim.
+     * Enemy debuff may be applied based on random chance.
+     * @param e Input Entity to be attacked
+     */
     public void attackEntity(Entity e)
     {
         int dmgDone = this.getAtk();
@@ -25,6 +33,7 @@ public class User extends Entity
             debuffApplied = true;
         }
         
+        //cancel debuff if selected item gives you immunity
         if(selectedItem.getBuff() == "immune") debuffApplied = false;
 
         //applying debuff
@@ -61,7 +70,7 @@ public class User extends Entity
             }
         }
 
-        //use item
+        //item hp effects are applied
         if(selectedItem != null)
         {
             if(selectedItem.getName() != "Twin Popsicle")
@@ -104,17 +113,26 @@ public class User extends Entity
     {
         return(null);
     }
-
+    /**
+     * Returns score of User
+     * @return score of User
+     */
     public int getScore()
     {
         return(this.score);
     }
-
+    /**
+     * Returns debuffApplied state of User
+     * @return debuffApplied of User
+     */
     public boolean getDBApplied()
     {
         return(this.debuffApplied);
     }
-
+    /**
+     * Returns selectedItem of User
+     * @return selectedItem of User
+     */
     public Item getSelectedItem()
     {
         return(this.selectedItem);
