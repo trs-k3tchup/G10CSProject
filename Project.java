@@ -1,16 +1,42 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
 class Project
 {
     public static void main(String[] args)
     {
-        Item healS = new Item("Heal Pot S", null, 10, 0, 0);
-        Item healM = new Item("Heal Pot M", null, 25, 0, 0);
-        Item healL = new Item("Heal Pot L", null, 60, 0, 0);
-        Item healX = new Item("Heal Pot X", "supercharged", 0, 0, 50);
-        Item sandwich = new Item("Sandwich", "immune", 0, 0, 100);
-        Item biogesic = new Item("Biogesic", "immune", 0, 0, 0);
-        Item alaxanFR = new Item("Alaxan FR", "strength", 0, 0, 0);
-        Item scottsVitamins = new Item("Scott's Vitamins", "tough", 0, 0, 0);
-        Item skiMask = new Item("Ski Mask", "evasive", 0, 0, 0);
-        Item twinPopsicle = new Item("Twin Popsicle", null, 0, 0, 75);
+        //read enemy.csv file and create enemytypes
+        File enemyList = new File("G10CSProject\\Data\\enemies.csv");
+        try (FileReader fr = new FileReader(enemyList))
+        {
+            BufferedReader reader = new BufferedReader(fr);
+            String line;
+            while((line = reader.readLine()) != null)
+            {
+                String details[] = line.split(",");
+                new EnemyType(details[0], details[1], Integer.parseInt(details[2]), Boolean.parseBoolean(details[3]), details[4]);
+            }
+        } catch (IOException e1)
+        {
+            e1.printStackTrace();
+        }
+
+        //read items.csv file and create items
+        File itemList = new File("G10CSProject\\Data\\items.csv");
+        try (FileReader fr = new FileReader(itemList))
+        {
+            BufferedReader reader = new BufferedReader(fr);
+            String line;
+            while((line = reader.readLine()) != null)
+            {
+                String details[] = line.split(",");
+                new Item(details[0], details[1], Integer.parseInt(details[2]), Integer.parseInt(details[3]), Integer.parseInt(details[4]), details[5]);
+            }
+        } catch (IOException e1)
+        {
+            e1.printStackTrace();
+        }
     }
 }

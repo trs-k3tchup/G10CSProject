@@ -1,0 +1,10 @@
+Heal Pot S,null,20,0,0,Recovers a small amount of health.
+Heal Pot M,null,50,0,0,Recovers a moderate amount of health.
+Heal Pot L,null,110,0,0,Recovers a large amount of health.
+Heal Pot X,supercharged,0,0,50,Recovers 50% of maximum health and sets buff to "supercharged".
+Twin Popsicle,null,0,0,75,Recovers 75% of maximum health and recovers enemy health by the same amount.
+McDoland's 5-Cheese Slobber,immune,0,0,100,Recovers 100% of maximum health and sets buff to "immune".
+George,null,-70,-100,0,George is your best friend.
+Alaxan FR,strength,0,0,0,Sets buff to "strength".
+Scott's Vitamins,tough,0,0,0,Sets buff to "tough".
+Ski Mask, evasive,0,0,0,Sets buff to "evasive".
