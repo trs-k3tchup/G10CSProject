@@ -23,7 +23,7 @@ public abstract class Entity
             this.defense = l * 2;
         } else
         {
-            this.attack = l * 2;
+            this.attack = l * 3;
             this.defense = l * 3;
         }
         
@@ -40,11 +40,11 @@ public abstract class Entity
 
         if(aggro)
         {
-            this.attack = 3;
+            this.attack = 5;
             this.defense = 2;
         } else
         {
-            this.attack = 2;
+            this.attack = 3;
             this.defense = 3;
         }
         

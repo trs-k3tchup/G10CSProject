@@ -16,6 +16,7 @@ public class User extends Entity
         super(n, aggro);
         score = 0;
         enemiesDefeated = 0;
+        selectedItem = null;
     }
 
     /**
@@ -28,7 +29,6 @@ public class User extends Entity
         int dmgDone = this.getAtk();
         int resist = e.getDef();
 
-        /*
         //determine if enemy debuff will be applied or not
         int randInt = ThreadLocalRandom.current().nextInt(1, 100 + 1);
         debuffApplied = false;
@@ -36,10 +36,13 @@ public class User extends Entity
         {
             debuffApplied = true;
         }
-        
+        /*
         //cancel debuff if selected item gives you immunity
-        if(selectedItem.getBuff() == "immune") debuffApplied = false;
-
+        if(this.selectedItem.getBuff().equals("immune"))
+        {
+            debuffApplied = false;
+        }
+        */
         //applying debuff
         if(debuffApplied)
         {
@@ -47,23 +50,23 @@ public class User extends Entity
             {
                 case "weakened":
                     dmgDone = (int)(dmgDone * 0.75);
-                    System.out.print(e.getName() + " caused you to be weakened! Your attack went down!");
+                    System.out.println(e.getName() + " caused you to be weakened! Your attack went down!");
                     break;
                 case "deficient":
-                    System.out.print(e.getName() + " caused you to be deficient! Your defense went down!");
+                    System.out.println(e.getName() + " caused you to be deficient! Your defense went down!");
                     break;
                 case "poisoned":
                     dmgDone = (int)(dmgDone * 0.75);
                     this.changeHPby(-1 * ((int)(this.getMHP() * 0.1)));
-                    System.out.print(e.getName() + " poisoned you! All stats went down!");
+                    System.out.println(e.getName() + " poisoned you! All stats went down!");
                     break;
                 case "bleed":
                     this.changeHPby(-1 * ((int)(this.getMHP() * 0.2)));
-                    System.out.print(e.getName() + " caused you to bleed! You suffered some damage!");
+                    System.out.println(e.getName() + " caused you to bleed! You suffered some damage!");
                     break;
                 case "paralyzed":
                     int x = ThreadLocalRandom.current().nextInt(1, 100 + 1);
-                    if(x <= 30) {dmgDone = 0; System.out.print(e.getName() + " paralyzed you! Your attack missed!");}
+                    if(x <= 30) {dmgDone = 0; System.out.println(e.getName() + " paralyzed you! Your attack missed!");}
                     break;
                 case "confused":
                     int y = ThreadLocalRandom.current().nextInt(1, 100 + 1);
@@ -71,15 +74,15 @@ public class User extends Entity
                     {
                         this.changeHPby((int)(-1 * dmgDone * 0.5));
                         dmgDone = 0;
-                        System.out.print(e.getName() + " confused you! You accidentally hit yourself!");
+                        System.out.println(e.getName() + " confused you! You accidentally hit yourself!");
                     }
                     break;
                 case "frozen":
                     selectedItem = null; 
-                    System.out.print(e.getName() + " froze you! You were prevented from using items!");
+                    System.out.println(e.getName() + " froze you! You were prevented from using items!");
             }
         }
-
+        /*
         //item hp effects are applied
         if(selectedItem != null)
         {

@@ -26,7 +26,7 @@ class Project
         }
 
         //read items.csv file and create items
-        File itemList = new File("G10CSProject\\Data\\items.csv");
+        File itemList = new File("Data\\items.csv");
         try (FileReader fr = new FileReader(itemList))
         {
             BufferedReader reader = new BufferedReader(fr);
