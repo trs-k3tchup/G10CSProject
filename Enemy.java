@@ -1,8 +1,13 @@
 import java.util.concurrent.ThreadLocalRandom;
-
+/**
+ * An Enemy is an automatically generated Entity for the User to fight.
+ * Enemies have a debuff ability and a debuffChance, which may be applied to the user.
+ * 
+ * @author Ash Choi
+ */
 public class Enemy extends Entity
 {
-    String ability;
+    private String ability;
 
     //constructor
     public Enemy(String n, int l, boolean aggro, int db, String a)
@@ -10,7 +15,11 @@ public class Enemy extends Entity
         super(n, l, aggro, db);
         ability = a;
     }
-
+    /**
+     * Attacks another Entity. Damage dealt is calculated based on stats of both attacker and victim.
+     * Checks the User for buffs and debuffs.
+     * @param u
+     */
     public void attackEntity(User u)
     {
         int dmgDone = this.getAtk();
@@ -51,7 +60,10 @@ public class Enemy extends Entity
         if(dmgDone < 0) dmgDone = 0;
         u.changeHPby(-1 * dmgDone);
     }
-
+    /**
+     * Returns ability of Enemy
+     * @return ability of Enemy
+     */
     public String getAbility()
     {
         return(ability);

@@ -1,6 +1,7 @@
 import java.util.concurrent.ThreadLocalRandom;
 /**
  * The User class is a subclass of Entity and represents the User. The User has a score, enemiesDefeated, and can use items.
+ * 
  * @author Ash Choi
  */
 public class User extends Entity
