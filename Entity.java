@@ -128,9 +128,10 @@ public abstract class Entity
     public void levelUp()
     {
         this.level++;
-        this.attack++;
-        this.defense++;
+        this.attack+=3;
+        this.defense+=3;
         this.maxHP += 10;
         this.healthPoints = this.maxHP;
+        System.out.println("You levelled up! Your current level is now " + this.level);
     }
 }

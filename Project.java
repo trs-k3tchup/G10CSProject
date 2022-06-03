@@ -65,8 +65,10 @@ class Project
         {
             case "agr":
                 isAggro = true;
+                break;
             case "def":
                 isAggro = false;
+                break;
         }
 
         User player = new User(name, isAggro);
@@ -75,7 +77,7 @@ class Project
         //EnemyType.generate();
 
         //main loop
-        while(player.getHP() > 0)
+        while(true)
         {
             int enemyType = ThreadLocalRandom.current().nextInt(0, 15);
             currentEnemy = new Enemy(EnemyType.getTypeByIndex(enemyType).getName(),
@@ -85,11 +87,54 @@ class Project
                                     EnemyType.getTypeByIndex(enemyType).getDebuff(),
                                     EnemyType.getTypeByIndex(enemyType).getDesc());
             
-            System.out.println(currentEnemy.getName() + " blocks your way. What will you do?");
-            System.out.println("1. Check");
-            System.out.println("2. Fight");
-            System.out.println("3. Item");
-            answer = sc.nextLine();
+            while(currentEnemy.getHP() > 0)
+            {
+                boolean endTurn = false;
+                while(endTurn == false)
+                {
+                    System.out.println("--------");
+                    System.out.println(currentEnemy.getName() + " blocks your way. What will you do? (enter the number only)");
+                    System.out.println("1. Check");
+                    System.out.println("2. Item");
+                    System.out.println("3. Fight");
+                    answer = sc.nextLine();
+                    while(!answer.toLowerCase().equals("1") && !answer.toLowerCase().equals("2") && !answer.toLowerCase().equals("3"))
+                    {
+                        System.out.println("Invalid input.");
+                        answer = sc.nextLine();
+                    }
+                    System.out.println("--------");
+                    switch(answer)
+                    {
+                        case "1":
+                            System.out.println(player.getName());
+                            System.out.println("Level " + player.getLvl() + ", " + player.getHP() + "/" + player.getMHP() + "HP");
+                            System.out.println(player.getAtk() + " Attack, " + player.getDef() + " Defense");
+                            System.out.println("Score: " + player.getScore());
+                            System.out.println("--------");
+                            System.out.println(currentEnemy.getName());
+                            System.out.println("Level " + currentEnemy.getLvl() + ", " + currentEnemy.getHP() + "/" + currentEnemy.getMHP() + "HP");
+                            System.out.println(currentEnemy.getAtk() + " Attack, " + currentEnemy.getDef() + " Defense");
+                            System.out.println("Ability: " + currentEnemy.getAbility());
+                            System.out.println(currentEnemy.getDesc() + "\n");
+                            break;
+                        case "2":
+                            System.out.println("Oopsie poopsie! That feature is still in development!");
+                            break;
+                        case "3":
+                            player.attackEntity(currentEnemy);
+                            currentEnemy.attackEntity(player);
+                            endTurn = true;
+                            break;
+                    }
+                }
+            }
+            System.out.println(currentEnemy.getName() + " has been defeated!");
+            player.increaseKills();
+            if(player.getKills()%2 == 0)
+            {
+                player.levelUp();
+            }
         }
     }
 }

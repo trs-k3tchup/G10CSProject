@@ -61,6 +61,7 @@ public class Enemy extends Entity
         dmgDone = dmgDone - resist;
         if(dmgDone < 0) dmgDone = 0;
         u.changeHPby(-1 * dmgDone);
+        System.out.println(this.getName() + " dealt " + dmgDone + " damage to you!");
     }
     /**
      * Returns ability of Enemy

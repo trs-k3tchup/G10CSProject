@@ -14,6 +14,8 @@ public class User extends Entity
     public User(String n, boolean aggro)
     {
         super(n, aggro);
+        score = 0;
+        enemiesDefeated = 0;
     }
 
     /**
@@ -26,6 +28,7 @@ public class User extends Entity
         int dmgDone = this.getAtk();
         int resist = e.getDef();
 
+        /*
         //determine if enemy debuff will be applied or not
         int randInt = ThreadLocalRandom.current().nextInt(1, 100 + 1);
         debuffApplied = false;
@@ -44,19 +47,23 @@ public class User extends Entity
             {
                 case "weakened":
                     dmgDone = (int)(dmgDone * 0.75);
+                    System.out.print(e.getName() + " caused you to be weakened! Your attack went down!");
                     break;
                 case "deficient":
+                    System.out.print(e.getName() + " caused you to be deficient! Your defense went down!");
                     break;
                 case "poisoned":
                     dmgDone = (int)(dmgDone * 0.75);
                     this.changeHPby(-1 * ((int)(this.getMHP() * 0.1)));
+                    System.out.print(e.getName() + " poisoned you! All stats went down!");
                     break;
                 case "bleed":
                     this.changeHPby(-1 * ((int)(this.getMHP() * 0.2)));
+                    System.out.print(e.getName() + " caused you to bleed! You suffered some damage!");
                     break;
                 case "paralyzed":
                     int x = ThreadLocalRandom.current().nextInt(1, 100 + 1);
-                    if(x <= 30) {dmgDone = 0;}
+                    if(x <= 30) {dmgDone = 0; System.out.print(e.getName() + " paralyzed you! Your attack missed!");}
                     break;
                 case "confused":
                     int y = ThreadLocalRandom.current().nextInt(1, 100 + 1);
@@ -64,10 +71,12 @@ public class User extends Entity
                     {
                         this.changeHPby((int)(-1 * dmgDone * 0.5));
                         dmgDone = 0;
+                        System.out.print(e.getName() + " confused you! You accidentally hit yourself!");
                     }
                     break;
                 case "frozen":
                     selectedItem = null; 
+                    System.out.print(e.getName() + " froze you! You were prevented from using items!");
             }
         }
 
@@ -103,10 +112,11 @@ public class User extends Entity
 
         if(selectedItem != null) selectedItem.used();
 
-        //finally
+        //finally */
         dmgDone = dmgDone - resist;
         if(dmgDone < 0) {dmgDone = 0;}
         e.changeHPby(-1 * dmgDone);
+        System.out.println("You dealt " + dmgDone + " damage to " + e.getName() + "!");
     }
 
     @Override
@@ -137,5 +147,21 @@ public class User extends Entity
     public Item getSelectedItem()
     {
         return(this.selectedItem);
+    }
+    /**
+     * Returns enemiesDefeated of User
+     * @return enemiesDefeated of User
+     */
+    public int getKills()
+    {
+        return(this.enemiesDefeated);
+    }
+    /**
+     * Increases enemiesDefeated by 1 and score by 500
+     */
+    public void increaseKills()
+    {
+        this.enemiesDefeated++;
+        this.score += 500;
     }
 }
