@@ -72,6 +72,7 @@ class Project
         }
 
         User player = new User(name, isAggro);
+        boolean dead = false;
         Enemy currentEnemy;
         System.out.println("Welcome, " + player.getName() + "!");
         //EnemyType.generate();
@@ -128,7 +129,13 @@ class Project
                             break;
                     }
                 }
+                if(player.getHP() <= 0)
+                {
+                    dead = true;
+                    break;
+                }
             }
+            if(dead){break;}
             System.out.println(currentEnemy.getName() + " has been defeated!");
             player.increaseKills();
             if(player.getKills()%2 == 0)
@@ -136,5 +143,6 @@ class Project
                 player.levelUp();
             }
         }
+        System.out.println("You lost! Your final score is " + player.getScore() + " points after defeating " + player.getKills() + " enemies.");
     }
 }
